@@ -3,6 +3,8 @@ class Marcador {
         if (Marcador.instance == null){
             this.board=[]
             Marcador.instance = this
+        } else {
+            throw new Error ('Impossible to instantiate another Marcador')
         }
         return Marcador.instance
     }
