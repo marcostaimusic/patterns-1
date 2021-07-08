@@ -17,6 +17,12 @@ class Topic extends EventEmitter{
         this.observers = this.observers.filter(x => x != observer)
     }
 
+    startListener(){
+        this.on('messageLogged', (arg) => {
+            console.log(`A message was posted by ${arg.name}: ${arg.text}`) 
+            this.notify(arg)})
+    }
+
     notify(post){
         this.observers.forEach( x=> {
             if (x.name === post.name){
