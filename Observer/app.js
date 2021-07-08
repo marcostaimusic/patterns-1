@@ -14,13 +14,9 @@ topic1.addObserver(user1)
 topic2.addObserver(user2)
 topic2.addObserver(user3)
 
+topic1.startListener()
+topic2.startListener()
 
-topic1.on('messageLogged', (arg) => {
-    console.log(`A message was posted by ${arg.name}: ${arg.text}`) 
-    topic1.notify(arg)})
-topic2.on('messageLogged', (arg)=>{
-    console.log(`A message was posted by ${arg.name}: ${arg.text}`)
-    topic2.notify(arg)})
 
 user1.postMessage(topic1, 'Hello world!')
 user2.postMessage(topic2, 'This is my first post')
