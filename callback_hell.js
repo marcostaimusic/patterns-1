@@ -11,27 +11,23 @@ str
 .reverse()
 .join("");
 
+
 async function getFilePaths(){
-   let files = await fs.promises.readdir(inbox)
-   return files
+  return fs.promises.readdir(inbox)
 }
 
 async function printFiles () {
-  const files = await getFilePaths();
+  const files = await getFilePaths() // Assume this works fine
 
-  for (const file of files) {
-    const contents = await fs.promises.readFile(join(inbox,file), 'utf8');
-    console.log(contents)
-    return contents;
-  }
-}
-
-async function reverse(){
-  const text = await printFiles()
-  fs.promises.writeFile(join(outbox,file), reverseText(text))
+  files.forEach(async (file) => {
+    const text = await fs.promises.readFile(join(inbox,file), 'utf8')
+    await fs.promises.writeFile(join(outbox,file), reverseText(text))
+  })
 }
 
 printFiles()
+
+
 
 // fs.promises.readdir(inbox)
 // .then(x=>{x.forEach(file=>
